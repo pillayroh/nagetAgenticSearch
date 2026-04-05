@@ -35,6 +35,8 @@ class Settings(BaseSettings):
     llm_max_entities: int = 8
 
     cors_origins: str = "http://localhost:3000,http://127.0.0.1:3000"
+    # Matches any https://*.vercel.app (production + previews). Set CORS_ORIGIN_REGEX= to disable.
+    cors_origin_regex: str = r"https://.*\.vercel\.app"
 
     scrape_timeout_s: float = 20.0
     max_concurrent_fetches: int = 5
@@ -52,6 +54,8 @@ class Settings(BaseSettings):
         "llm_backend",
         "hf_inference_provider",
         "hf_token",
+        "cors_origins",
+        "cors_origin_regex",
         mode="before",
     )
     @classmethod

@@ -104,4 +104,4 @@ If you see *â€œdoes not have sufficient permissions to call Inference Providersâ
 
 ## License
 
-MIT (adjust as needed for your course).
+MIT 

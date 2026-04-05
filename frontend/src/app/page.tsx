@@ -224,7 +224,18 @@ export default function Home() {
       const json = (await r.json()) as SearchResponse;
       setData(json);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Request failed");
+      const raw = e instanceof Error ? e.message : "Request failed";
+      const isNetwork =
+        raw === "Failed to fetch" ||
+        raw === "Load failed" ||
+        raw.toLowerCase().includes("network");
+      if (isNetwork) {
+        setError(
+          `Cannot reach the API (${API}). On Vercel set NEXT_PUBLIC_API_URL to your Render API (https, no trailing slash). If the API is up, wait ~60s for Render cold start and retry. Origin: ${typeof window !== "undefined" ? window.location.origin : ""}`,
+        );
+      } else {
+        setError(raw);
+      }
     } finally {
       setLoading(false);
     }

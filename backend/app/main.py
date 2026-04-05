@@ -45,17 +45,21 @@ async def startup() -> None:
         )
 
 
-def _cors_origins() -> list[str]:
-    return [o.strip() for o in get_settings().cors_origins.split(",") if o.strip()]
+def _cors_middleware_kwargs() -> dict:
+    s = get_settings()
+    kw: dict = {
+        "allow_origins": [o.strip() for o in s.cors_origins.split(",") if o.strip()],
+        "allow_credentials": True,
+        "allow_methods": ["*"],
+        "allow_headers": ["*"],
+    }
+    rx = (s.cors_origin_regex or "").strip()
+    if rx:
+        kw["allow_origin_regex"] = rx
+    return kw
 
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=_cors_origins(),
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+app.add_middleware(CORSMiddleware, **_cors_middleware_kwargs())
 
 
 @app.get("/health")
