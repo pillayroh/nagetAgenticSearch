@@ -1,0 +1,9 @@
+fastapi==0.115.6
+uvicorn[standard]==0.32.1
+motor==3.6.0
+httpx==0.28.1
+trafilatura==2.0.0
+openai==1.57.4
+huggingface_hub>=0.27.0
+pydantic-settings==2.6.1
+python-dotenv==1.0.1

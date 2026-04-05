@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Dark “Google”-style surfaces (Material-inspired) */
+:root {
+  --g-dark-bg: #202124;
+  --g-dark-bg-elevated: #303134;
+  --g-dark-bg-hover: #3c4043;
+  --g-dark-border: #3c4043;
+  --g-dark-border-strong: #5f6368;
+  --g-dark-text: #e8eaed;
+  --g-dark-text-secondary: #9aa0a6;
+  --g-dark-text-tertiary: #bdc1c6;
+  --g-dark-link: #8ab4f8;
+  --g-dark-link-hover: #aecbfa;
+  --g-dark-error: #f28b82;
+  --g-dark-focus: rgba(138, 180, 248, 0.45);
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  color: var(--g-dark-text);
+  background: var(--g-dark-bg);
+  min-height: 100vh;
+}
+
+@keyframes google-dots {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.google-loading-dot {
+  animation: google-dots 1.2s ease-in-out infinite;
+}
+
+.google-loading-dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.google-loading-dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.google-dark-hero-glow {
+  background: radial-gradient(
+    ellipse 90% 60% at 50% -20%,
+    rgba(138, 180, 248, 0.12),
+    transparent 55%
+  );
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

@@ -1,0 +1,26 @@
+# https://render.com/docs/blueprint-spec
+# New Blueprint → connect this repo → set secret env vars in the dashboard.
+services:
+  - type: web
+    name: agentic-search-api
+    runtime: docker
+    region: oregon
+    plan: free
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    healthCheckPath: /health
+    envVars:
+      - key: USE_MONGODB
+        value: "false"
+      - key: LLM_BACKEND
+        value: huggingface
+      - key: HF_INFERENCE_PROVIDER
+        value: featherless-ai
+      - key: LLM_MODEL
+        value: meta-llama/Meta-Llama-3.1-8B-Instruct
+      - key: TAVILY_API_KEY
+        sync: false
+      - key: HF_TOKEN
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false
